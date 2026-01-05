@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curiozități despre Pisici</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-paw"></i> Curiozități despre Pisici</h1>
+            <p class="subtitle">Descoperă lucruri fascinante despre prietenii noștri feline!</p>
+        </header>
+
+        <main>
+            <div class="cat-illustration">
+                <div class="cat">
+                    <div class="cat-head">
+                        <div class="cat-ears">
+                            <div class="cat-ear left-ear"></div>
+                            <div class="cat-ear right-ear"></div>
+                        </div>
+                        <div class="cat-face">
+                            <div class="cat-eyes">
+                                <div class="cat-eye left-eye"></div>
+                                <div class="cat-eye right-eye"></div>
+                            </div>
+                            <div class="cat-nose"></div>
+                            <div class="cat-mouth"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fact-container">
+                <div class="fact-header">
+                    <h2><i class="fas fa-lightbulb"></i> Curiozitatea Zilei</h2>
+                </div>
+                <div class="fact-display" id="factDisplay">
+                    <p class="placeholder">Apasă butonul pentru a obține o curiozitate despre pisici!</p>
+                </div>
+                <div class="fact-stats">
+                    <p><i class="fas fa-history"></i> <span id="factCount">0</span> curiozități afișate</p>
+                    <p><i class="fas fa-heart"></i> <span id="likeCount">0</span> aprecieri</p>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button id="getFactBtn" class="btn-primary">
+                    <i class="fas fa-cat"></i> Află o curiozitate!
+                </button>
+                <button id="likeBtn" class="btn-secondary" disabled>
+                    <i class="far fa-heart"></i> Apreciază
+                </button>
+                <button id="copyBtn" class="btn-secondary">
+                    <i class="far fa-copy"></i> Copiază
+                </button>
+            </div>
+
+            <div class="history-section">
+                <h3><i class="fas fa-history"></i> Istoric Curiozități</h3>
+                <div class="history-container" id="historyContainer">
+                    <p class="empty-history">Nu există istoric încă. Obține prima curiozitate!</p>
+                </div>
+                <button id="clearHistoryBtn" class="btn-clear">Șterge Istoricul</button>
+            </div>
+        </main>
+
+        <footer>
+            <p>Datele sunt preluate de la <a href="https://catfact.ninja/" target="_blank">Cat Facts API</a></p>
+            <p>Realizat cu <i class="fas fa-heart"></i> pentru iubitorii de pisici</p>
+        </footer>
+    </div>
+
+    <div class="notification" id="notification"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
