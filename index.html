@@ -3,80 +3,740 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Curiozități despre Pisici</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Cat Facts Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #3a86ff;
+            --secondary-color: #8338ec;
+            --success-color: #2ecc71;
+            --warning-color: #ff9f1c;
+            --danger-color: #e63946;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --gray-color: #6c757d;
+            --light-gray: #e9ecef;
+            --border-radius: 10px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: #f5f7fb;
+            color: var(--dark-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo i {
+            font-size: 2.5rem;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .logo p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .stats {
+            display: flex;
+            gap: 20px;
+        }
+
+        .stat-box {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: var(--border-radius);
+            text-align: center;
+        }
+
+        .stat-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .stat-box p {
+            font-size: 0.9rem;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .card-header h2 {
+            font-size: 1.4rem;
+            color: var(--dark-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        label {
+            font-weight: 600;
+            color: var(--gray-color);
+        }
+
+        select, button {
+            padding: 12px 15px;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--light-gray);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        select:focus, button:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn:hover {
+            background-color: #2a75ff;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: var(--gray-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        .btn-success {
+            background-color: var(--success-color);
+        }
+
+        .btn-success:hover {
+            background-color: #27ae60;
+        }
+
+        .facts-container {
+            min-height: 300px;
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        .fact-item {
+            background-color: var(--light-gray);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .fact-item:hover {
+            background-color: #e2e6ea;
+        }
+
+        .fact-item p {
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+        }
+
+        .fact-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--gray-color);
+        }
+
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            text-align: center;
+            color: var(--gray-color);
+        }
+
+        .loading i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            animation: spin 1.5s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error-alert {
+            background-color: rgba(230, 57, 70, 0.1);
+            border: 1px solid var(--danger-color);
+            color: var(--danger-color);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .error-alert i {
+            font-size: 1.5rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--gray-color);
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: var(--light-gray);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--gray-color);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--light-gray);
+            margin-top: 20px;
+        }
+
+        .console-log {
+            background-color: var(--dark-color);
+            color: #00ff00;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            max-height: 200px;
+            overflow-y: auto;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .console-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            color: white;
+            font-weight: 600;
+        }
+
+        .toggle-console {
+            background-color: transparent;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .log-entry {
+            margin-bottom: 5px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 5px;
+        }
+
+        .log-time {
+            color: #aaa;
+        }
+
+        .log-info {
+            color: #4da6ff;
+        }
+
+        .log-success {
+            color: #00ff00;
+        }
+
+        .log-error {
+            color: #ff6666;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1><i class="fas fa-paw"></i> Curiozități despre Pisici</h1>
-            <p class="subtitle">Descoperă lucruri fascinante despre prietenii noștri feline!</p>
+            <div class="logo">
+                <i class="fas fa-cat"></i>
+                <div>
+                    <h1>Cat Facts Dashboard</h1>
+                    <p>Fapte interesante despre pisici, la un click distanță</p>
+                </div>
+            </div>
+            <div class="stats">
+                <div class="stat-box">
+                    <h3 id="total-facts">0</h3>
+                    <p>Fapte încărcate</p>
+                </div>
+                <div class="stat-box">
+                    <h3 id="fact-length">0</h3>
+                    <p>Lungime medie</p>
+                </div>
+            </div>
         </header>
 
-        <main>
-            <div class="cat-illustration">
-                <div class="cat">
-                    <div class="cat-head">
-                        <div class="cat-ears">
-                            <div class="cat-ear left-ear"></div>
-                            <div class="cat-ear right-ear"></div>
-                        </div>
-                        <div class="cat-face">
-                            <div class="cat-eyes">
-                                <div class="cat-eye left-eye"></div>
-                                <div class="cat-eye right-eye"></div>
-                            </div>
-                            <div class="cat-nose"></div>
-                            <div class="cat-mouth"></div>
-                        </div>
+        <div class="error-alert" id="error-alert" style="display: none;">
+            <i class="fas fa-exclamation-triangle"></i>
+            <div>
+                <h3 id="error-title">Eroare la încărcarea datelor</h3>
+                <p id="error-message"></p>
+            </div>
+        </div>
+
+        <div class="dashboard">
+            <div class="card">
+                <div class="card-header">
+                    <h2><i class="fas fa-sliders-h"></i> Controale</h2>
+                </div>
+                <div class="controls">
+                    <div class="control-group">
+                        <label for="fact-count">Număr de fapte:</label>
+                        <select id="fact-count">
+                            <option value="1">1 fapt</option>
+                            <option value="5" selected>5 fapte</option>
+                            <option value="10">10 fapte</option>
+                            <option value="20">20 fapte</option>
+                        </select>
                     </div>
+                    <div class="control-group">
+                        <label for="fact-length">Lungimea maximă:</label>
+                        <select id="fact-length">
+                            <option value="all">Toate lungimile</option>
+                            <option value="short">Scurt (sub 100 caractere)</option>
+                            <option value="medium">Mediu (100-200 caractere)</option>
+                            <option value="long">Lung (peste 200 caractere)</option>
+                        </select>
+                    </div>
+                    <button class="btn" id="fetch-facts">
+                        <i class="fas fa-paw"></i>
+                        Încarcă fapte noi
+                    </button>
+                    <button class="btn btn-secondary" id="clear-facts">
+                        <i class="fas fa-trash-alt"></i>
+                        Șterge faptele
+                    </button>
+                    <button class="btn btn-success" id="toggle-console-btn">
+                        <i class="fas fa-terminal"></i>
+                        Afișează/ascunde consola
+                    </button>
                 </div>
             </div>
 
-            <div class="fact-container">
-                <div class="fact-header">
-                    <h2><i class="fas fa-lightbulb"></i> Curiozitatea Zilei</h2>
+            <div class="card">
+                <div class="card-header">
+                    <h2><i class="fas fa-list-alt"></i> Fapte despre pisici</h2>
+                    <span id="facts-count-display">0 fapte</span>
                 </div>
-                <div class="fact-display" id="factDisplay">
-                    <p class="placeholder">Apasă butonul pentru a obține o curiozitate despre pisici!</p>
-                </div>
-                <div class="fact-stats">
-                    <p><i class="fas fa-history"></i> <span id="factCount">0</span> curiozități afișate</p>
-                    <p><i class="fas fa-heart"></i> <span id="likeCount">0</span> aprecieri</p>
+                <div class="facts-container" id="facts-container">
+                    <div class="empty-state" id="empty-state">
+                        <i class="fas fa-cat"></i>
+                        <h3>Niciun fapt încărcat</h3>
+                        <p>Apasă "Încarcă fapte noi" pentru a începe</p>
+                    </div>
+                    <div class="loading" id="loading" style="display: none;">
+                        <i class="fas fa-spinner"></i>
+                        <p>Se încarcă fapte despre pisici...</p>
+                    </div>
+                    <!-- Faptele vor fi adăugate aici dinamic -->
                 </div>
             </div>
+        </div>
 
-            <div class="controls">
-                <button id="getFactBtn" class="btn-primary">
-                    <i class="fas fa-cat"></i> Află o curiozitate!
-                </button>
-                <button id="likeBtn" class="btn-secondary" disabled>
-                    <i class="far fa-heart"></i> Apreciază
-                </button>
-                <button id="copyBtn" class="btn-secondary">
-                    <i class="far fa-copy"></i> Copiază
-                </button>
+        <div class="console-log" id="console-log">
+            <div class="console-header">
+                <span>Jurnal API (console.log)</span>
+                <button class="toggle-console" id="clear-console">Șterge jurnalul</button>
             </div>
-
-            <div class="history-section">
-                <h3><i class="fas fa-history"></i> Istoric Curiozități</h3>
-                <div class="history-container" id="historyContainer">
-                    <p class="empty-history">Nu există istoric încă. Obține prima curiozitate!</p>
-                </div>
-                <button id="clearHistoryBtn" class="btn-clear">Șterge Istoricul</button>
-            </div>
-        </main>
+            <div id="console-content"></div>
+        </div>
 
         <footer>
-            <p>Datele sunt preluate de la <a href="https://catfact.ninja/" target="_blank">Cat Facts API</a></p>
-            <p>Realizat cu <i class="fas fa-heart"></i> pentru iubitorii de pisici</p>
+            <p>Cat Facts Dashboard &copy; 2023 | Folosește <a href="https://catfact.ninja/" target="_blank">Cat Facts API</a></p>
         </footer>
     </div>
 
-    <div class="notification" id="notification"></div>
+    <script>
+        // Elemente DOM
+        const elements = {
+            factsContainer: document.getElementById('facts-container'),
+            loading: document.getElementById('loading'),
+            emptyState: document.getElementById('empty-state'),
+            errorAlert: document.getElementById('error-alert'),
+            errorTitle: document.getElementById('error-title'),
+            errorMessage: document.getElementById('error-message'),
+            fetchFactsBtn: document.getElementById('fetch-facts'),
+            clearFactsBtn: document.getElementById('clear-facts'),
+            factCountSelect: document.getElementById('fact-count'),
+            factLengthSelect: document.getElementById('fact-length'),
+            totalFactsElement: document.getElementById('total-facts'),
+            factLengthElement: document.getElementById('fact-length'),
+            factsCountDisplay: document.getElementById('facts-count-display'),
+            consoleLog: document.getElementById('console-log'),
+            consoleContent: document.getElementById('console-content'),
+            toggleConsoleBtn: document.getElementById('toggle-console-btn'),
+            clearConsoleBtn: document.getElementById('clear-console')
+        };
 
-    <script src="script.js"></script>
+        // Starea aplicației
+        const state = {
+            facts: [],
+            logs: []
+        };
+
+        // Adaugă un mesaj în jurnalul consolei vizuale
+        function addLog(message, type = 'info') {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString();
+            const logEntry = {
+                time: timeString,
+                message: message,
+                type: type
+            };
+            
+            state.logs.push(logEntry);
+            
+            // Actualizează afișarea consolei
+            updateConsoleDisplay();
+            
+            // De asemenea, loghează în consola browserului
+            const consoleMessage = `[${timeString}] ${message}`;
+            switch(type) {
+                case 'info':
+                    console.info(consoleMessage);
+                    break;
+                case 'success':
+                    console.log(consoleMessage);
+                    break;
+                case 'error':
+                    console.error(consoleMessage);
+                    break;
+                default:
+                    console.log(consoleMessage);
+            }
+        }
+
+        // Actualizează afișarea consolei vizuale
+        function updateConsoleDisplay() {
+            elements.consoleContent.innerHTML = '';
+            
+            state.logs.forEach(log => {
+                const logElement = document.createElement('div');
+                logElement.className = `log-entry log-${log.type}`;
+                logElement.innerHTML = `<span class="log-time">[${log.time}]</span> ${log.message}`;
+                elements.consoleContent.appendChild(logElement);
+            });
+            
+            // Derulează automat la ultimul mesaj
+            elements.consoleContent.scrollTop = elements.consoleContent.scrollHeight;
+        }
+
+        // Afișează sau ascunde consola vizuală
+        function toggleConsole() {
+            if (elements.consoleLog.style.display === 'none' || elements.consoleLog.style.display === '') {
+                elements.consoleLog.style.display = 'block';
+                addLog('Consola vizuală a fost afișată', 'info');
+            } else {
+                elements.consoleLog.style.display = 'none';
+            }
+        }
+
+        // Șterge conținutul consolei vizuale
+        function clearConsole() {
+            state.logs = [];
+            updateConsoleDisplay();
+            addLog('Jurnalul consolei a fost șters', 'info');
+        }
+
+        // Afișează o eroare în UI
+        function showError(title, message) {
+            elements.errorTitle.textContent = title;
+            elements.errorMessage.textContent = message;
+            elements.errorAlert.style.display = 'flex';
+            addLog(`EROARE UI: ${title} - ${message}`, 'error');
+            
+            // Ascunde eroarea după 10 secunde
+            setTimeout(() => {
+                elements.errorAlert.style.display = 'none';
+            }, 10000);
+        }
+
+        // Ascunde eroarea din UI
+        function hideError() {
+            elements.errorAlert.style.display = 'none';
+        }
+
+        // Afișează starea de încărcare
+        function showLoading() {
+            elements.loading.style.display = 'flex';
+            elements.emptyState.style.display = 'none';
+        }
+
+        // Ascunde starea de încărcare
+        function hideLoading() {
+            elements.loading.style.display = 'none';
+        }
+
+        // Obține fapte despre pisici de la API
+        async function fetchCatFacts() {
+            try {
+                showLoading();
+                hideError();
+                
+                const factCount = elements.factCountSelect.value;
+                addLog(`Cerere trimisă pentru ${factCount} fapt(e) despre pisici...`, 'info');
+                
+                // Construiește URL-ul API
+                let apiUrl = `https://catfact.ninja/facts?limit=${factCount}`;
+                addLog(`URL API: ${apiUrl}`, 'info');
+                
+                // Efectuează cererea
+                const response = await fetch(apiUrl);
+                
+                if (!response.ok) {
+                    throw new Error(`Răspuns API: ${response.status} ${response.statusText}`);
+                }
+                
+                addLog('Răspuns primit de la API, se procesează datele...', 'info');
+                
+                const data = await response.json();
+                
+                addLog(`Date primite cu succes: ${data.data.length} fapt(e)`, 'success');
+                
+                // Filtrăm faptele după lungimea selectată
+                const filteredFacts = filterFactsByLength(data.data);
+                addLog(`Filtrate ${filteredFacts.length} fapte după lungime`, 'info');
+                
+                // Actualizează starea aplicației
+                state.facts = filteredFacts;
+                
+                // Actualizează UI-ul
+                renderFacts();
+                updateStats();
+                
+            } catch (error) {
+                addLog(`Eroare la pasul de obținere a datelor: ${error.message}`, 'error');
+                showError('Eroare la încărcarea datelor', `Nu s-au putut încărca faptele despre pisici: ${error.message}`);
+            } finally {
+                hideLoading();
+            }
+        }
+
+        // Filtrează faptele după lungimea selectată
+        function filterFactsByLength(facts) {
+            const lengthFilter = elements.factLengthSelect.value;
+            
+            if (lengthFilter === 'all') {
+                return facts;
+            }
+            
+            return facts.filter(fact => {
+                const factLength = fact.length;
+                
+                switch(lengthFilter) {
+                    case 'short':
+                        return factLength < 100;
+                    case 'medium':
+                        return factLength >= 100 && factLength <= 200;
+                    case 'long':
+                        return factLength > 200;
+                    default:
+                        return true;
+                }
+            });
+        }
+
+        // Redă faptele în UI
+        function renderFacts() {
+            elements.factsContainer.innerHTML = '';
+            
+            if (state.facts.length === 0) {
+                elements.emptyState.style.display = 'block';
+                elements.factsCountDisplay.textContent = '0 fapte';
+                return;
+            }
+            
+            elements.emptyState.style.display = 'none';
+            
+            state.facts.forEach((fact, index) => {
+                const factElement = document.createElement('div');
+                factElement.className = 'fact-item';
+                
+                // Determină categoria după lungime
+                let lengthCategory = 'Lung';
+                if (fact.length < 100) {
+                    lengthCategory = 'Scurt';
+                } else if (fact.length <= 200) {
+                    lengthCategory = 'Mediu';
+                }
+                
+                factElement.innerHTML = `
+                    <p>${fact.fact}</p>
+                    <div class="fact-meta">
+                        <span><i class="fas fa-hashtag"></i> ${index + 1}</span>
+                        <span><i class="fas fa-ruler"></i> ${fact.length} caractere (${lengthCategory})</span>
+                    </div>
+                `;
+                
+                elements.factsContainer.appendChild(factElement);
+            });
+            
+            elements.factsCountDisplay.textContent = `${state.facts.length} fapt${state.facts.length !== 1 ? 'e' : ''}`;
+            addLog(`UI actualizat cu ${state.facts.length} fapt(e)`, 'success');
+        }
+
+        // Actualizează statisticile din header
+        function updateStats() {
+            elements.totalFactsElement.textContent = state.facts.length;
+            
+            if (state.facts.length > 0) {
+                const totalLength = state.facts.reduce((sum, fact) => sum + fact.length, 0);
+                const avgLength = Math.round(totalLength / state.facts.length);
+                elements.factLengthElement.textContent = avgLength;
+            } else {
+                elements.factLengthElement.textContent = '0';
+            }
+            
+            addLog(`Statistici actualizate: ${state.facts.length} fapte, lungime medie ${elements.factLengthElement.textContent}`, 'info');
+        }
+
+        // Șterge toate faptele din UI
+        function clearFacts() {
+            addLog('Ștergere fapte inițiată...', 'info');
+            
+            state.facts = [];
+            renderFacts();
+            updateStats();
+            
+            addLog('Toate faptele au fost șterse', 'success');
+        }
+
+        // Inițializarea aplicației
+        function initApp() {
+            addLog('Aplicația Cat Facts Dashboard a fost inițializată', 'success');
+            
+            // Ascultători de evenimente pentru butoane
+            elements.fetchFactsBtn.addEventListener('click', fetchCatFacts);
+            elements.clearFactsBtn.addEventListener('click', clearFacts);
+            
+            // Ascultători pentru schimbarea filtrelor
+            elements.factCountSelect.addEventListener('change', () => {
+                addLog(`Număr de fapte schimbat la: ${elements.factCountSelect.value}`, 'info');
+            });
+            
+            elements.factLengthSelect.addEventListener('change', () => {
+                addLog(`Filtru lungime schimbat la: ${elements.factLengthSelect.value}`, 'info');
+                if (state.facts.length > 0) {
+                    // Re-filtrează faptele existente
+                    const allFacts = [...state.facts];
+                    state.facts = filterFactsByLength(allFacts);
+                    renderFacts();
+                    updateStats();
+                }
+            });
+            
+            // Ascultători pentru consola vizuală
+            elements.toggleConsoleBtn.addEventListener('click', toggleConsole);
+            elements.clearConsoleBtn.addEventListener('click', clearConsole);
+            
+            // Încarcă automat câteva fapte la pornire
+            fetchCatFacts();
+            
+            addLog('Toți ascultătorii de evenimente au fost atașați', 'success');
+        }
+
+        // Pornește aplicația când DOM-ul este încărcat complet
+        document.addEventListener('DOMContentLoaded', initApp);
+    </script>
 </body>
 </html>
