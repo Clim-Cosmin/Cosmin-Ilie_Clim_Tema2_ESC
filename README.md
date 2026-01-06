@@ -1,89 +1,36 @@
-# Cat Facts Dashboard
+# Aplicația de Curiozități despre Pisici 🐱
 
-O aplicație web elegantă și profesională de tip Dashboard care afișează fapte interesante despre pisici, utilizând Cat Facts API.
+O aplicație web modernă care afișează curiozități aleatorii despre pisici folosind Cat Facts API.
 
-## Caracteristici
+## Descriere
 
-- **Design profesional de tip Dashboard**: Interfață modernă și intuitivă
-- **Integrare cu Cat Facts API**: Obține fapte reale și actualizate despre pisici
-- **Filtrare avansată**: Filtrează faptele după număr și lungime
-- **Sistem de logging**: Afișează jurnale detaliate pentru depanare
-- **Gestionare erori robustă**: Afișează erorile atât în consolă cât și în interfața utilizatorului
-- **Design responsive**: Funcționează pe dispozitive mobile și desktop
-
-## Tehnologii utilizate
-
-- HTML5, CSS3, JavaScript vanilla
-- Font Awesome pentru pictograme
-- Cat Facts API (https://catfact.ninja/)
+Această aplicație permite utilizatorilor să descopere fapte interesante și amuzante despre pisici. Fiecare curiozitate este preluată în timp real de la [Cat Facts API](https://catfact.ninja/), o sursă externă care oferă informații diverse despre aceste animale domestice iubite.
 
 ## Funcționalități
 
-1. **Încărcare fapte**: Obține între 1 și 20 de fapte despre pisici
-2. **Filtrare după lungime**: Filtrează faptele după lungime (scurt, mediu, lung)
-3. **Statistici**: Vezi numărul total de fapte și lungimea medie
-4. **Jurnal console**: Monitorizează toate etapele procesului
-5. **Gestionare erori**: Afișează erorile clar în interfață și consolă
-
-## Structura codului
-
-### HTML
-- Structură semantică cu header, dashboard, card-uri și footer
-- Elemente pentru afișarea faptelor, controalelor și jurnalului
-
-### CSS
-- Variabile CSS pentru culori și stiluri consistente
-- Design responsive cu Grid și Flexbox
-- Animații subtile pentru o experiență plăcută
-
-### JavaScript
-- Utilizează `async/await` pentru operațiuni asincrone
-- Implementează blocuri `try/catch` pentru gestionarea erorilor
-- Logging detaliat în fiecare etapă a procesului
-- Arhitectură modulară și ușor de întreținut
-
-## Logging și depanare
-
-Aplicația include un sistem de logging cuprinzător:
-
-1. **Console.log în browser**: Toate etapele sunt logate în consola browserului
-2. **Consolă vizuală**: Afișează jurnalul direct în interfață
-3. **Mesaje de eroare**: Erorile sunt afișate clar atât în consolă cât și în UI
-
-Exemple de mesaje logate:
-- "Cerere trimisă pentru X fapt(e) despre pisici..."
-- "Date primite cu succes: X fapt(e)"
-- "Eroare la pasul de obținere a datelor: [mesaj de eroare]"
+1. **Afișare curiozități** - O nouă curiozitate despre pisici la fiecare solicitare
+2. **Detalii suplimentare** - Tabel cu informații despre fiecare curiozitate:
+   - De cât timp există faptul/credința
+   - Căreia rase de pisici îi aparține
+   - Dacă este mit sau realitate
+3. **Interfață modernă** - Design responsive care funcționează pe toate dispozitivele
+4. **Feedback vizual** - Animații și efecte pentru o experiență placută
+5. **Gestionare erori** - Afișare mesaje clare în caz de probleme cu API-ul
 
 ## Cum se utilizează
 
-1. Deschideți fișierul HTML într-un browser modern
-2. Selectați numărul de fapte dorite din dropdown
-3. Alegeți o filtrare după lungime (opțional)
-4. Apăsați "Încarcă fapte noi" pentru a obține fapte despre pisici
-5. Utilizați butonul "Afișează/ascunde consola" pentru a vedea jurnalul
+1. **Deschideți aplicația** în browser-ul preferat
+2. **La prima încărcare**, veți vedea o curiozitate despre pisici
+3. **Apăsați butonul "Încarcă curiozitate nouă"** pentru a genera un alt fapt interesant
+4. **Tasta spațiu** poate fi folosită și ea pentru a reîncărca o nouă curiozitate
+5. **Citiți informațiile** din tabel pentru a afla mai multe detalii despre curiozitate
 
-## Gestionarea erorilor
+## Tehnologii utilizate
 
-Dacă cererea către API eșuează:
-1. Eroarea este logată în consolă cu detalii complete
-2. Un mesaj de eroare este afișat în interfața utilizatorului
-3. Mesajul de eroare dispare automat după 10 secunde
+- **HTML5** - Structura paginii
+- **CSS3** - Stilizare modernă cu animații și design responsive
+- **JavaScript (ES6+)** - Logica aplicației și comunicarea cu API-ul
+- **Cat Facts API** - Sursa datelor pentru curiozități
+- **Font Awesome** - Iconițe pentru o interfață mai atractivă
 
-## Personalizare
-
-Puteți personaliza aplicația modificând variabilele CSS din secțiunea `:root`:
-- Culori primare și secundare
-- Dimensiuni și raze de colț
-- Umbre și tranziții
-
-## Compatibilitate
-
-Aplicația funcționează în toate browserele moderne care suportă:
-- ES6+ (async/await, arrow functions)
-- CSS Grid și Flexbox
-- Fetch API
-
-## API utilizat
-
-Aplicația folosește Cat Facts API (https://catfact.ninja/), un API gratuit și open-source care oferă fapte interesante despre pisici.
+## Structura proiectului

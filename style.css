@@ -1,0 +1,454 @@
+/* style.css - Stilizare pentru aplicația de curiozități despre pisici */
+
+/* Reset și setări de bază */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f8fafc;
+    color: #1e293b;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-image: radial-gradient(circle at 1px 1px, #e2e8f0 1px, transparent 0);
+    background-size: 20px 20px;
+}
+
+/* Container principal */
+.container {
+    max-width: 800px;
+    width: 100%;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    padding: 40px;
+    border: 1px solid #f1f5f9;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.container:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+}
+
+/* Header */
+header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #f1f5f9;
+}
+
+h1 {
+    color: #3b82f6;
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+h1 i {
+    color: #f59e0b;
+    font-size: 2.2rem;
+    animation: gentle-pulse 3s infinite ease-in-out;
+}
+
+@keyframes gentle-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.subtitle {
+    color: #64748b;
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+}
+
+/* Container pentru curiozitate */
+.fact-container {
+    background-color: #f8fafc;
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 32px;
+    border-left: 6px solid #3b82f6;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border: 1px solid #e2e8f0;
+    position: relative;
+}
+
+.fact-container.loading-animation {
+    background: linear-gradient(90deg, #f8fafc 25%, #e2e8f0 50%, #f8fafc 75%);
+    background-size: 200% 100%;
+    animation: loading-shimmer 1.5s infinite;
+}
+
+@keyframes loading-shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+.fact-container:hover {
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.08);
+    border-color: #dbeafe;
+}
+
+.fact-title {
+    font-size: 1.4rem;
+    color: #1e40af;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 600;
+}
+
+.fact-title i {
+    color: #3b82f6;
+}
+
+.fact-text {
+    font-size: 1.25rem;
+    line-height: 1.7;
+    color: #334155;
+    font-weight: 500;
+}
+
+/* Stil pentru mesajele de eroare */
+.error-message {
+    color: #dc2626;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+}
+
+.error-message i {
+    font-size: 1.2rem;
+}
+
+/* Tabel cu datele curiozității */
+.data-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-bottom: 40px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+    border: 1px solid #e2e8f0;
+}
+
+.data-table thead {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    color: white;
+}
+
+.data-table th {
+    text-align: left;
+    padding: 22px 24px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+.data-table th i {
+    margin-right: 12px;
+    font-size: 1.1rem;
+}
+
+.data-table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.data-table tbody tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+.data-table tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+.data-table tbody tr:hover {
+    background-color: #eff6ff;
+}
+
+.data-table td {
+    padding: 20px 24px;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 1.1rem;
+}
+
+.data-table tr:last-child td {
+    border-bottom: none;
+}
+
+.data-table .label {
+    font-weight: 600;
+    color: #475569;
+    width: 45%;
+}
+
+.data-table .value {
+    font-weight: 600;
+    color: #1e40af;
+    padding-left: 10px;
+}
+
+/* Buton pentru încărcarea unei noi curiozități */
+.load-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
+    border: none;
+    border-radius: 14px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.25);
+    letter-spacing: 0.3px;
+}
+
+.load-button:hover {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
+}
+
+.load-button:active {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+}
+
+.load-button:disabled {
+    background: linear-gradient(135deg, #94a3b8 0%, #64748b 100%);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: 0 4px 10px rgba(100, 116, 139, 0.2);
+}
+
+.load-button i {
+    font-size: 1.1rem;
+    transition: transform 0.5s ease;
+}
+
+.load-button:hover i {
+    transform: rotate(180deg);
+}
+
+.load-button:disabled i {
+    transform: none;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+    color: #64748b;
+    font-size: 0.95rem;
+}
+
+/* Stil pentru stare de încărcare */
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 20px;
+    color: #3b82f6;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.fa-spinner {
+    animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Notificări */
+.notification {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    background-color: white;
+    padding: 18px 24px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 1000;
+    transform: translateX(120%);
+    transition: transform 0.3s ease;
+    max-width: 350px;
+    border-left: 5px solid #3b82f6;
+}
+
+.notification.show {
+    transform: translateX(0);
+}
+
+.notification.success {
+    border-left-color: #10b981;
+}
+
+.notification.success i {
+    color: #10b981;
+}
+
+.notification.error {
+    border-left-color: #dc2626;
+}
+
+.notification.error i {
+    color: #dc2626;
+}
+
+.notification i {
+    font-size: 1.4rem;
+}
+
+.notification span {
+    font-weight: 500;
+    font-size: 1.05rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 30px 25px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    h1 i {
+        font-size: 1.8rem;
+    }
+    
+    .fact-container {
+        padding: 24px;
+    }
+    
+    .fact-text {
+        font-size: 1.15rem;
+    }
+    
+    .data-table th, 
+    .data-table td {
+        padding: 16px 18px;
+        font-size: 1.05rem;
+    }
+    
+    .load-button {
+        padding: 18px;
+        font-size: 1.1rem;
+    }
+    
+    .notification {
+        top: 20px;
+        right: 20px;
+        left: 20px;
+        max-width: none;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 15px 10px;
+    }
+    
+    .container {
+        padding: 24px 20px;
+        border-radius: 16px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+    
+    .fact-container {
+        padding: 20px;
+        min-height: 180px;
+    }
+    
+    .fact-text {
+        font-size: 1.1rem;
+    }
+    
+    .data-table {
+        font-size: 0.95rem;
+    }
+    
+    .data-table th, 
+    .data-table td {
+        padding: 14px 16px;
+        display: block;
+        width: 100%;
+    }
+    
+    .data-table tr {
+        display: block;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid #e2e8f0;
+    }
+    
+    .data-table thead {
+        display: none;
+    }
+    
+    .data-table .label {
+        background-color: #f1f5f9;
+        padding: 12px 16px;
+        border-bottom: 1px solid #e2e8f0;
+        font-size: 1rem;
+    }
+    
+    .data-table .value {
+        padding: 12px 16px;
+        font-size: 1.05rem;
+    }
+    
+    .load-button {
+        padding: 16px;
+        font-size: 1.05rem;
+    }
+}
