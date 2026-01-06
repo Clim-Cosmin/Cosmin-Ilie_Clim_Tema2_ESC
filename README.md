@@ -32,3 +32,4 @@ Această aplicație permite utilizatorilor să descopere fapte interesante și a
 - **JavaScript (ES6+)** - Logica aplicației și comunicarea cu API-ul
 - **Cat Facts API** - Sursa datelor pentru curiozități
 - **Font Awesome** - Iconițe pentru o interfață mai atractivă
+
